@@ -9,7 +9,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -49,8 +49,7 @@ public class KbDocument {
 
     private int chunkCount;
 
-    @Lob
-    @Column(length = 100_000)
+    @Column(columnDefinition = "text")
     private String chunkIdsJson;
 
     @Column(length = 1000)
