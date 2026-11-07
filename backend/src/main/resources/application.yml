@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: docmind
+  datasource:
+    url: jdbc:h2:file:./data/docmind;MODE=PostgreSQL;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+  ai:
+    vectorstore:
+      type: simple
+    openai:
+      api-key: ${OPENAI_API_KEY:}
+      base-url: ${OPENAI_BASE_URL:https://api.openai.com}
+      chat:
+        options:
+          model: ${LLM_MODEL:gpt-4o-mini}
+          temperature: 0.3
+      embedding:
+        options:
+          model: ${EMBEDDING_MODEL:text-embedding-3-small}
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:docmind-dev-secret-change-me-in-production-0123456789abcdef}
+    expiration-ms: 604800000
+  upload-dir: ./data/uploads
+  vector-store-path: ./data/vector-store.json
+  cors:
+    allowed-origins: http://localhost:5173,http://localhost:4173
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.ai: INFO
