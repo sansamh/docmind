@@ -2,7 +2,7 @@
 
 Full-stack **Retrieval-Augmented Generation (RAG)** application: upload documents (PDF, DOCX, TXT, MD, CSV, JSON), and chat with them — every answer streams in real time and cites the exact source chunks it was built from.
 
-Live demo: *coming soon*
+Live demo: **[docmind-1uj.pages.dev](https://docmind-1uj.pages.dev)** (frontend on Cloudflare Pages, backend on Railway)
 
 ![Java](https://img.shields.io/badge/Java-21-orange) ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5-brightgreen) ![Spring AI](https://img.shields.io/badge/Spring%20AI-1.0-green) ![React](https://img.shields.io/badge/React-18-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
 
@@ -80,7 +80,7 @@ npm run dev        # http://localhost:5173, proxies /api to :8080
 
 ## Deployment
 
-- **Frontend** → Vercel (build `npm run build`, output `dist/`)
-- **Backend** → Railway or Fly.io (Docker) with a Postgres add-on; switch the vector store bean to `PgVectorStore` and set `spring.profiles.active=prod`
+- **Frontend** → Cloudflare Pages (`dist/` + a `_worker.js` that proxies `/api/*` to the backend)
+- **Backend** → Railway (multi-stage `Dockerfile`), Postgres with **pgvector** (`pgvector/pgvector:pg16` image), profile `prod`
 
-See `backend/Dockerfile` and `vercel.json` for ready-to-use configs.
+See `backend/Dockerfile` and `frontend/_worker.js` for ready-to-use configs.
